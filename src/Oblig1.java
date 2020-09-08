@@ -4,19 +4,6 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class Oblig1 {
-    public static void main(String[] args) {
-
-        //int[] a = {6, 10, 9, 4, 1, 3, 8, 5, 2, 7};
-        //char[] a = {'A','B','C','D','E','F','G','H','I','J'};
-
-        String a = flett("ABC", "DEFGH");
-        String b = flett("IKLMN", "OPQ");
-        String c = flett("", "AB");
-
-        System.out.println(a + " " + b + " " + c);
-
-    }
-
     public static void byttInt(int[] a, int h, int v) {
         int temp = a[v];
         a[v] = a[h];
