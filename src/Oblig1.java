@@ -1,27 +1,27 @@
+// Mohammad Tayyab Khalid - s319229
+
 import java.util.Arrays;
 import java.util.NoSuchElementException;
-
 
 public class Oblig1 {
     public static void main(String[] args) {
 
-        int[] a = {9, 1, 2, 3,5, 6, 7, 8 ,5};
-        antallUlikeUsortert(a);
-        System.out.println(antallUlikeUsortert(a));
+        //int[] a = {6, 10, 9, 4, 1, 3, 8, 5, 2, 7};
+        //char[] a = {'A','B','C','D','E','F','G','H','I','J'};
+
+        String a = flett("ABC", "DEFGH");
+        String b = flett("IKLMN", "OPQ");
+        String c = flett("", "AB");
+
+        System.out.println(a + " " + b + " " + c);
+
     }
 
-    public static void bytteInt(int[] a, int h, int v) {
-        int temp = a[v];
-        temp = a[h];
-        a[h] = temp;
-    }
-
-    public static void byttChar(char[] a, int h, int v) {
+    public static void byttInt(int[] a, int h, int v) {
         int temp = a[v];
         a[v] = a[h];
-        a[h] = (char) temp;
+        a[h] = temp;
     }
-
 
     public static boolean isSorted(int[] a) {
 
@@ -134,7 +134,7 @@ public class Oblig1 {
 
         for (int j = 0; j <= storst; j++) {
             for (int k = 0; k < a.length; k++) {
-                if(a[k] == j) {
+                if (a[k] == j) {
                     antallUlike++;
                     break;
                 }
@@ -142,7 +142,86 @@ public class Oblig1 {
         }
         return antallUlike;
     }
+
+    //Oppgave 4
+    public static void delsortering(int[] a) {
+
+        int v = 0;
+        int h = a.length - 1;
+
+        while (v <= h) {
+            if ((a[v] & 1) == 1) v++;
+
+            else {
+                if ((a[h] % 2) == 0) h--;
+                else byttInt(a, v++, h--);
+            }
+        }
+
+        Arrays.sort(a, 0, v);
+        Arrays.sort(a, v, a.length);
+    }
+
+    //Oppgave 5
+    public static void rotasjon(char[] a) {
+        if (a.length == 0 || a.length == 1) return;
+
+        for (int i = a.length - 1; i > 0; i--) {
+            char temp = a[i];
+            a[i] = a[i - 1];
+            a[i - 1] = temp;
+        }
+    }
+
+    // Oppgave 7a
+    public static String flett(String a, String b) {
+
+        String flettet = "";
+
+        int tellerA = 0;
+        int tellerB = 0;
+
+        while (tellerA != a.length() || tellerB != b.length()) {
+            if (tellerA < a.length()) {
+                flettet += a.charAt(tellerA++);
+            }
+
+            if (tellerB < b.length()) {
+                flettet += b.charAt(tellerB++);
+            }
+        }
+        return flettet;
+    }
+
+    //Oppgave 7b
+    public static String flett(String... s) {
+        if (s.length == 0) return "";
+
+        int l = s[0].length();
+
+        for (int i = 0; i < s.length; i++) {
+            int n = s[i].length();
+
+            if (n > l) {
+                l = n;
+            }
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < l; i++) {
+
+            for (String t : s) {
+                if (i < t.length()) {
+                    stringBuilder.append(t.charAt(i));
+                }
+            }
+
+        }
+        return stringBuilder.toString();
+    }
 }
+
+
 
 
 
