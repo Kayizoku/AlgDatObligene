@@ -14,8 +14,8 @@ import java.util.function.Predicate;
 public class DobbeltLenketListe<T> implements Liste<T> {
     public static void main(String[] args) {
 
-        Liste<String> liste = new DobbeltLenketListe<>();
-
+        String[] s = {"Ole", null, "Per", "Kari", null};
+        Liste<String> liste = new DobbeltLenketListe<>(s);
         System.out.println(liste.antall() + " " + liste.tom());
     }
 
@@ -45,10 +45,26 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
+        hode = hale = null;
+        antall = endringer = 0;
     }
 
     public DobbeltLenketListe(T[] a) {
-        throw new UnsupportedOperationException();
+        a = Objects.requireNonNull(a, "Tabellen er tom");
+
+        for (T q : a) {
+            if (q != null) {
+                if (antall() == 0) {
+                    hode = new Node<T>(q, hode, hale);
+                    hale = hode;
+                } else {
+                    hale = new Node<T>(q, hale, null);
+                    hale.forrige.neste = hale;
+                }
+                antall++;
+            }
+        }
+
     }
 
     public Liste<T> subliste(int fra, int til){
