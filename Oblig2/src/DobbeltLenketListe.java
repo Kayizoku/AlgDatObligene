@@ -15,6 +15,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public static void main(String[] args) {
 
         Liste<String> liste = new DobbeltLenketListe<>();
+
+        System.out.println(liste.antall() + " " + liste.tom());
     }
 
     /**
@@ -43,7 +45,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        throw new UnsupportedOperationException();
     }
 
     public DobbeltLenketListe(T[] a) {
@@ -56,12 +57,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        throw new UnsupportedOperationException();
+        return antall;
     }
 
     @Override
     public boolean tom() {
-        throw new UnsupportedOperationException();
+        if(antall == 0) {
+            return true;
+        } else
+            return false;
     }
 
     @Override
