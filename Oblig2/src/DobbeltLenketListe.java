@@ -8,9 +8,13 @@ import java.util.*;
 public class DobbeltLenketListe<T> implements Liste<T> {
     public static void main(String[] args) {
 
-        String[] s = {"Ole", null, "Per", "Kari", null};
-        Liste<String> liste = new DobbeltLenketListe<>(s);
-        System.out.println(liste.antall() + " " + liste.tom());
+        String[] s1 = {}, s2 = {"A"}, s3 = {null, "A", null, "B", null};
+        DobbeltLenketListe<String> l1 = new DobbeltLenketListe<>(s1);
+        DobbeltLenketListe<String> l2 = new DobbeltLenketListe<>(s2);
+        DobbeltLenketListe<String> l3 = new DobbeltLenketListe<>(s3);
+
+        System.out.println(l1.toString() + " " + l2.toString() + " " + l3.toString() +
+                " " + l1.omvendtString() + " " + l2.omvendtString() + " " + l3.omvendtString());
     }
 
     /**
@@ -148,6 +152,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public String omvendtString() {
 
+        if (antall == 0) {
+            return "[]";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        Node<T> node = hale;
+        if (node.verdi != null) {
+            sb.append(node.verdi);
+        }
+        node = node.forrige;
+
+        while (node != null) {
+            sb.append(", ");
+            sb.append(node.verdi);
+            node = node.forrige;
+        }
+        return sb.toString();
     }
 
     @Override
