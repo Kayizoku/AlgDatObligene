@@ -1,14 +1,8 @@
+
+
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
-
-import java.util.Comparator;
-import java.util.ConcurrentModificationException;
-import java.util.NoSuchElementException;
-import java.util.StringJoiner;
-
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.function.Predicate;
+import java.util.*;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -131,11 +125,29 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+
+        if (antall == 0) {
+            return "[]";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        Node<T> node = hode;
+        if (node.verdi != null) {
+            sb.append(node.verdi);
+        }
+        node = node.neste;
+
+        while (node != null) {
+            sb.append(", ");
+            sb.append(node.verdi);
+            node = node.neste;
+        }
+        return sb.toString();
     }
 
     public String omvendtString() {
-        throw new UnsupportedOperationException();
+
     }
 
     @Override
