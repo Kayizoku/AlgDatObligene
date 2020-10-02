@@ -8,13 +8,17 @@ import java.util.*;
 public class DobbeltLenketListe<T> implements Liste<T> {
     public static void main(String[] args) {
 
-        String[] s1 = {}, s2 = {"A"}, s3 = {null, "A", null, "B", null};
-        DobbeltLenketListe<String> l1 = new DobbeltLenketListe<>(s1);
-        DobbeltLenketListe<String> l2 = new DobbeltLenketListe<>(s2);
-        DobbeltLenketListe<String> l3 = new DobbeltLenketListe<>(s3);
 
-        System.out.println(l1.toString() + " " + l2.toString() + " " + l3.toString() +
-                " " + l1.omvendtString() + " " + l2.omvendtString() + " " + l3.omvendtString());
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>();
+
+        System.out.println(liste.toString() + " " + liste.omvendtString());
+
+        for (int i = 1; i <= 3; i++) {
+
+            liste.leggInn(i);
+            System.out.println(liste.toString() + " " + liste.omvendtString());
+        }
+
     }
 
     /**
@@ -82,9 +86,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             return false;
     }
 
+
     @Override
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException();
+
+        Objects.requireNonNull(verdi, "Nullverdier er ikke tillatt");
+
+        if(tom()) {
+            hode = hale = new Node<T>(verdi, null, null);
+        } else {
+            hale = hale.neste = new Node<T>(verdi, hale, null);
+        }
+        antall++;
+        endringer++;
+        return true;
+
     }
 
     @Override
@@ -94,6 +110,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean inneholder(T verdi) {
+        throw new UnsupportedOperationException();
+    }
+
+    private Node<T> finnNode(int index) {
         throw new UnsupportedOperationException();
     }
 
@@ -147,6 +167,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             sb.append(node.verdi);
             node = node.neste;
         }
+        sb.append("]");
+
         return sb.toString();
     }
 
@@ -169,6 +191,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             sb.append(node.verdi);
             node = node.forrige;
         }
+        sb.append("]");
+
         return sb.toString();
     }
 
