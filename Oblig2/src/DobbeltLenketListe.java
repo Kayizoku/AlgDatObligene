@@ -2,6 +2,7 @@
 
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
+import javax.swing.*;
 import java.util.*;
 
 
@@ -132,7 +133,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
-        throw new UnsupportedOperationException();
+        indeksKontroll(indeks, false);
+        return (T) finnNode(indeks).verdi;
     }
 
     @Override
