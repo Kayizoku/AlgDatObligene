@@ -70,8 +70,29 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     }
 
+    private void fraTilKontroll(int fra, int til) {
+        if (fra < 0) {
+            throw new IndexOutOfBoundsException("Verdien til fra er mindre enn 0");
+
+        } else if (til > antall) {
+            throw new IndexOutOfBoundsException("Verdien til er storre enn listen");
+
+        } else if (til < fra) {
+        throw new IndexOutOfBoundsException("Verdien til er mindre enn verdien fra");
+        }
+    }
+
     public Liste<T> subliste(int fra, int til){
-        throw new UnsupportedOperationException();
+
+        fraTilKontroll(fra, til);
+        DobbeltLenketListe<T> b = new DobbeltLenketListe<>();
+        Node<T> p = finnNode(fra);
+        for (int i = fra; i < til; i++) {
+            b.leggInn(p.verdi);
+            p = p.neste;
+        }
+        return b;
+
     }
 
     @Override
@@ -144,7 +165,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        throw new UnsupportedOperationException();
+
+        Objects.requireNonNull(nyverdi, "Du kan ikke legge inn nullverdier");
+
+        indeksKontroll(indeks,false);
+
+        Node<T> p = finnNode(indeks);
+        T forrigeVerdi = p.verdi;
+        p.verdi = nyverdi;
+        endringer++;
+        return forrigeVerdi;
+
+
     }
 
     @Override
