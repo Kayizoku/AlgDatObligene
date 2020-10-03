@@ -78,7 +78,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             throw new IndexOutOfBoundsException("Verdien til er storre enn listen");
 
         } else if (til < fra) {
-        throw new IndexOutOfBoundsException("Verdien til er mindre enn verdien fra");
+        throw new IllegalArgumentException("Verdien til er mindre enn verdien fra");
         }
     }
 
