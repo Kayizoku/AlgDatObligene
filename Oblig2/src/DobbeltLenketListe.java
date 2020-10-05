@@ -127,7 +127,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new UnsupportedOperationException();
+
+        if (verdi == null ) {
+            throw new NullPointerException("Det er ikke lov aa bruke null som verdi!");
+
+        } else if (indeks < 0) {
+            throw new IndexOutOfBoundsException("Du maa bruke en indeks som er storre enn 0!");
+
+        } else if (antall < indeks) {
+            throw new IndexOutOfBoundsException("Indeksen er storre enn antall!");
+        }
+        
     }
 
     @Override
