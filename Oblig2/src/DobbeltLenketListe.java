@@ -138,6 +138,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             throw new IndexOutOfBoundsException("Indeksen er storre enn antall!");
         }
         
+        if (tom()) {
+
+            hode = new Node<>(verdi, null, hode);
+            hale = hode;
+            antall++;
+            endringer++;
+
+        } else if (indeks == 0 && antall > 0) {
+
+            Node<T> p = hode;
+            hode = new Node<>(verdi, null, p);
+            p.forrige = hode;
+            antall++;
+            endringer++;
+
+        }
     }
 
     @Override
