@@ -137,7 +137,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         } else if (antall < indeks) {
             throw new IndexOutOfBoundsException("Indeksen er storre enn antall!");
         }
-        
+
         if (tom()) {
 
             hode = new Node<>(verdi, null, hode);
@@ -150,6 +150,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             Node<T> p = hode;
             hode = new Node<>(verdi, null, p);
             p.forrige = hode;
+            antall++;
+            endringer++;
+
+        } else if (indeks == antall) {
+
+            Node<T> p = hale;
+            hale = new Node<>(verdi, hale, null);
+            p.neste = hale;
             antall++;
             endringer++;
 
