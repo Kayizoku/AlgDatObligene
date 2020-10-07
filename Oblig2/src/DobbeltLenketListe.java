@@ -263,7 +263,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                     Node<T> r = q.neste;
 
                     if (q == hode) {
-                        r.forrige =  null;
+                        r.forrige = null;
                         hode = r;
 
                     } else if (q == hale) {
@@ -274,8 +274,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                         p.neste = r;
                         r.forrige = p;
                     }
+
                     antall--;
                     endringer++;
+
                     return true;
                 }
                 q = q.neste;
@@ -284,9 +286,45 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return false;
     }
 
+
     @Override
     public T fjern(int indeks) {
-        throw new UnsupportedOperationException();
+
+        if(tom()) {
+            throw new IndexOutOfBoundsException("Listen er tom");
+
+        } else if (indeks < 0 || indeks >= antall) {
+            throw new IndexOutOfBoundsException("Dett er ikke lov");
+
+        } else {
+            Node<T> q = finnNode(indeks);
+            Node<T> p = q.forrige;
+            Node<T> r;
+
+            if (antall == 1 && indeks == 0) {
+                hode = hale = null;
+
+            } else if (indeks == 0) {
+                r = q.neste;
+                r.forrige = null;
+                hode = r;
+
+            } else if (indeks == (antall - 1)) {
+                p.neste = null;
+                hale = p;
+
+            } else {
+                r = q.neste;
+                p.neste = r;
+                r.forrige = p;
+            }
+
+            antall--;
+            endringer++;
+
+            return q.verdi;
+        }
+
     }
 
     @Override
@@ -369,7 +407,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         @Override
-        public boolean hasNext(){
+        public boolean hasNext()
+        {
             return denne != null;
         }
 
