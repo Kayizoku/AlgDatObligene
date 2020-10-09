@@ -27,3 +27,6 @@ Dette repository inneholder alle Oblig innleveringene
 
 * Oppgave 8: løste ved å skjekket at endrigene stemmer og kaster exception basert på hva vi får. Hvis det stemmer blir verdien flyttet til nesten node og returnert. Løste b) ved å returnere en ny instants av DobbeltlenketListeIterator() I Iterator<T>() metoden som ikke tar en indeks som parameter. c) var løst ved å sette verdien denne til finnNode(indeks) metoden. d) ble løst ved å utføre en indeksKontroll() for å skjekke om indeksen er lovelig. Så returnener vi nå ny instants av DobbetLenketListeIterator(int indeks) med indeks i parantesen.
 
+# Warning:
+
+Fikk ikke fjernet alle advarslene, ettersom jeg ikke vet hva some foresaker dem. Det er 3 stykker som sier at "Method will throw an exception when Paramter is null" og den siste sier at boolean verdien fjernOK aldri blir aksessert. Prøvde å lage getter og setter men det lagde nye advarsler.
