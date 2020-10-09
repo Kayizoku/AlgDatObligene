@@ -128,38 +128,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public void leggInn(int indeks, T verdi) {
 
-        if (verdi == null ) {
-            throw new NullPointerException("Det er ikke lov aa bruke null som verdi!");
-
-        } else if (indeks < 0) {
-            throw new IndexOutOfBoundsException("Du maa bruke en indeks som er storre enn 0!");
-
-        } else if (antall < indeks) {
-            throw new IndexOutOfBoundsException("Indeksen er storre enn antall!");
-        }
+        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdi");
+        indeksKontroll(indeks, true);
 
         if (tom()) {
-
             hode = new Node<>(verdi, null, hode);
             hale = hode;
-            antall++;
-            endringer++;
 
         } else if (indeks == 0 && antall > 0) {
 
             Node<T> p = hode;
             hode = new Node<>(verdi, null, p);
             p.forrige = hode;
-            antall++;
-            endringer++;
 
         } else if (indeks == antall) {
 
             Node<T> p = hale;
             hale = new Node<>(verdi, hale, null);
             p.neste = hale;
-            antall++;
-            endringer++;
 
         } else {
 
@@ -172,13 +158,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
 
             Node<T> node = new Node<>(verdi, p, q);
-            antall++;
-            endringer++;
             if ( p != null) {
                 p.neste = node;
             }
             q.forrige = node;
         }
+        antall++;
+        endringer++;
     }
 
     @Override
