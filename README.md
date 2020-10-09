@@ -29,4 +29,4 @@ Dette repository inneholder alle Oblig innleveringene
 
 # Warning:
 
-Fikk ikke fjernet alle advarslene, ettersom jeg ikke vet hva some foresaker dem. Det er 3 stykker som sier at "Method will throw an exception when Paramter is null" og den siste sier at boolean verdien fjernOK aldri blir aksessert. Prøvde å lage getter og setter men det lagde nye advarsler.
+Fikk ikke fjernet alle advarslene, ettersom jeg ikke vet hva some foresaker dem. Det er 3 stykker som sier at "Method will throw an exception when Paramter is null" og den siste sier at boolean verdien fjernOK aldri blir aksessert. Prøvde å lage getter og setter men det lagde nye advarsler. Ellers er begge advarslene ufarlige.
