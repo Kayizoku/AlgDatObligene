@@ -326,8 +326,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void nullstill() {
-        throw new UnsupportedOperationException();
+/*
+        if (antall == 1) {
+            hode = hale = null;
+        } else {
+            Node<T> p = hode;
+            Node<T> q = p.neste;
+            for (int i = 0; i < antall; i++) {
+                p.verdi =  null;
+                p = q;
+            }
+        }
+        antall = 0;
+        endringer++;
+*/
+        while (antall > 0)
+            fjern(0);
     }
+
+    //2. måten er mye raskere og effektivt. Bruker ikke mange linjer med kode.
 
     @Override
     public String toString() {
@@ -384,7 +401,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Iterator<T> iterator(int indeks) {
-        throw new UnsupportedOperationException();
+        indeksKontroll(indeks, false);
+        return new DobbeltLenketListeIterator(indeks);
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T>
@@ -400,21 +418,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         private DobbeltLenketListeIterator(int indeks){
-            throw new UnsupportedOperationException();
+            denne = finnNode(indeks);
+            fjernOK = false;
+            iteratorendringer = endringer;
         }
 
         @Override
-        public boolean hasNext()
-        {
+        public boolean hasNext() {
             return denne != null;
         }
 
         @Override
         public T next(){
             if (iteratorendringer != endringer) {
-                throw new ConcurrentModificationException("Endringer er ikke like iteratorendrigene!");
+                throw new ConcurrentModificationException("Feil i antall endringer!");
+
             } else if (!hasNext()) {
-                throw new NoSuchElementException("Ingen flere elemter igjen i listen!");
+                throw new NoSuchElementException("Ikke flere elementer igjen i listen!");
             }
 
             fjernOK = true;
